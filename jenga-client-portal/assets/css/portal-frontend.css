@@ -1,0 +1,207 @@
+/* Jenga Client Portal - Frontend Styles - Sophisticated Dark Theme */
+
+:root {
+  --jp-bg: #0a0a0f;
+  --jp-card-bg: #1a1a26;
+  --jp-accent: #c9a44a;
+  --jp-accent-muted: rgba(201, 164, 74, 0.1);
+  --jp-text: #e1e1e6;
+  --jp-text-muted: #8e9299;
+  --jp-border: rgba(255, 255, 255, 0.08);
+  --jp-success: #28a745;
+  --jp-info: #17a2b8;
+  --jp-warning: #ffc107;
+  --jp-danger: #dc3545;
+}
+
+.jenga-portal-wrapper {
+  background-color: var(--jp-bg);
+  color: var(--jp-text);
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  padding: 32px;
+  border-radius: 12px;
+  max-width: 1024px;
+  margin: 0 auto;
+  border: 1px solid var(--jp-border);
+}
+
+.jenga-portal-wrapper h1,
+.jenga-portal-wrapper h2 {
+  font-family: 'Georgia', serif;
+  color: #fff;
+  font-weight: 400;
+  margin-top: 0;
+}
+
+.jenga-portal-wrapper h2 {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.jenga-portal-wrapper h3 {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--jp-text-muted);
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  margin-bottom: 16px;
+  font-weight: 500;
+  margin-top: 0;
+}
+
+.jenga-portal-wrapper h4 {
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  margin-top: 0;
+}
+
+.jp-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 768px) {
+  .jp-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.jp-card {
+  background: var(--jp-card-bg);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid var(--jp-border);
+}
+
+.jp-stat h3 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--jp-text-muted);
+  margin-bottom: 8px;
+}
+
+.jp-stat .jp-value {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--jp-accent);
+}
+
+.jp-badge {
+  font-size: 10px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  display: inline-block;
+}
+
+.jp-badge-success { background: rgba(40, 167, 69, 0.15); color: var(--jp-success); }
+.jp-badge-warning { background: rgba(255, 193, 7, 0.15); color: var(--jp-warning); }
+.jp-badge-danger { background: rgba(220, 53, 69, 0.15); color: var(--jp-danger); }
+.jp-badge-info { background: rgba(23, 162, 184, 0.15); color: var(--jp-info); }
+.jp-badge-neutral { background: rgba(255, 255, 255, 0.05); color: var(--jp-text-muted); }
+
+.jp-btn {
+  background: var(--jp-accent);
+  color: var(--jp-bg);
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.jp-btn:hover {
+  opacity: 0.9;
+  color: var(--jp-bg);
+}
+
+.jp-progress-container {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  height: 6px;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+.jp-progress-bar {
+  background: var(--jp-accent);
+  height: 100%;
+  width: 0;
+  transition: width 1s ease-in-out;
+}
+
+/* Forms */
+.jp-form-group {
+    margin-bottom: 16px;
+}
+
+.jp-form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--jp-text-muted);
+    font-size: 13px;
+}
+
+.jp-form-group input,
+.jp-form-group select,
+.jp-form-group textarea {
+    width: 100%;
+    padding: 12px;
+    background: var(--jp-bg);
+    border: 1px solid var(--jp-border);
+    color: var(--jp-text);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.jp-form-group input:focus,
+.jp-form-group select:focus,
+.jp-form-group textarea:focus {
+    outline: none;
+    border-color: var(--jp-accent);
+}
+
+.jp-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.jp-table th,
+.jp-table td {
+    padding: 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--jp-border);
+    font-size: 14px;
+}
+
+.jp-table th {
+    color: var(--jp-text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+.jp-table tr:hover td {
+    background-color: rgba(255,255,255,0.02);
+}
+
+a {
+    color: var(--jp-accent);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
