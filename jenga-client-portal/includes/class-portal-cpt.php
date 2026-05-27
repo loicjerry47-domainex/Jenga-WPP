@@ -2,16 +2,88 @@
 
 class Jenga_Portal_CPT {
 
+    private static $old_ticket_status  = array();
+    private static $old_project_status = array();
+
     public static function init() {
         add_action( 'init', array( __CLASS__, 'register_post_types' ) );
         add_action( 'init', array( __CLASS__, 'register_taxonomies' ) );
         add_action( 'add_meta_boxes', array( __CLASS__, 'add_meta_boxes' ) );
         add_action( 'save_post', array( __CLASS__, 'save_meta_boxes' ) );
-        
+
+        // Capture old status values before save (priority 5 runs before save_meta_boxes at 10)
+        add_action( 'save_post_jenga_ticket',  array( __CLASS__, 'capture_old_ticket_status' ), 5 );
+        add_action( 'save_post_jenga_project', array( __CLASS__, 'capture_old_project_status' ), 5 );
+
+        // Fire status-change notifications after meta is saved (priority 20)
+        add_action( 'save_post_jenga_ticket',  array( __CLASS__, 'maybe_notify_ticket_status' ), 20, 3 );
+        add_action( 'save_post_jenga_project', array( __CLASS__, 'maybe_notify_project_status' ), 20, 3 );
+
+        // New document notification on first publish
+        add_action( 'transition_post_status', array( __CLASS__, 'maybe_notify_new_document' ), 10, 3 );
+
+        // Admin replies to ticket via WP comment box → notify client
+        add_action( 'comment_post', array( __CLASS__, 'maybe_notify_admin_reply' ), 10, 3 );
+
         // Check if rewrite rules need flushing
         if ( get_option( 'jenga_portal_flush_rewrite_rules' ) ) {
             flush_rewrite_rules();
             delete_option( 'jenga_portal_flush_rewrite_rules' );
+        }
+    }
+
+    public static function capture_old_ticket_status( $post_id ) {
+        self::$old_ticket_status[ $post_id ] = get_post_meta( $post_id, '_jenga_ticket_status', true );
+    }
+
+    public static function capture_old_project_status( $post_id ) {
+        self::$old_project_status[ $post_id ] = get_post_meta( $post_id, '_jenga_status', true );
+    }
+
+    public static function maybe_notify_ticket_status( $post_id, $post, $update ) {
+        if ( ! $update ) {
+            return;
+        }
+        $new_status = get_post_meta( $post_id, '_jenga_ticket_status', true );
+        $old_status = isset( self::$old_ticket_status[ $post_id ] ) ? self::$old_ticket_status[ $post_id ] : '';
+        if ( $old_status && $new_status && $old_status !== $new_status ) {
+            Jenga_Portal_Notifications::notify_client_ticket_status_change( $post_id, $new_status );
+        }
+    }
+
+    public static function maybe_notify_project_status( $post_id, $post, $update ) {
+        if ( ! $update ) {
+            return;
+        }
+        $new_status = get_post_meta( $post_id, '_jenga_status', true );
+        $old_status = isset( self::$old_project_status[ $post_id ] ) ? self::$old_project_status[ $post_id ] : '';
+        if ( $old_status && $new_status && $old_status !== $new_status ) {
+            Jenga_Portal_Notifications::notify_client_project_status_change( $post_id, $new_status );
+        }
+    }
+
+    public static function maybe_notify_new_document( $new_status, $old_status, $post ) {
+        if ( $post->post_type !== 'jenga_document' ) {
+            return;
+        }
+        if ( $new_status === 'publish' && $old_status !== 'publish' ) {
+            Jenga_Portal_Notifications::notify_client_new_document( $post->ID );
+        }
+    }
+
+    public static function maybe_notify_admin_reply( $comment_id, $comment_approved, $commentdata ) {
+        if ( ! $comment_approved ) {
+            return;
+        }
+        $post = get_post( $commentdata['comment_post_ID'] );
+        if ( ! $post || $post->post_type !== 'jenga_ticket' ) {
+            return;
+        }
+        $commenter_id    = (int) $commentdata['user_id'];
+        $ticket_owner_id = (int) get_post_meta( $post->ID, '_jenga_client_id', true );
+        // Only notify when an admin (not the ticket owner) posts a comment
+        if ( $commenter_id && $commenter_id !== $ticket_owner_id && user_can( $commenter_id, 'manage_options' ) ) {
+            Jenga_Portal_Notifications::notify_client_new_reply( $post->ID, $comment_id );
         }
     }
 
@@ -89,7 +161,13 @@ class Jenga_Portal_CPT {
         $budget    = get_post_meta( $post->ID, '_jenga_budget', true );
         $url       = get_post_meta( $post->ID, '_jenga_url', true );
 
-        $clients = get_users( array( 'role__in' => array( 'portal_client', 'administrator' ) ) );
+        $clients  = get_users( array( 'role__in' => array( 'portal_client', 'administrator' ) ) );
+        $statuses = apply_filters( 'jenga_portal_project_statuses', array(
+            'Not Started' => __( 'Not Started', 'jenga-portal' ),
+            'In Progress' => __( 'In Progress', 'jenga-portal' ),
+            'Under Review' => __( 'Under Review', 'jenga-portal' ),
+            'Completed'   => __( 'Completed', 'jenga-portal' ),
+        ) );
         ?>
         <p>
             <label><strong><?php _e( 'Client:', 'jenga-portal' ); ?></strong><br>
@@ -104,10 +182,9 @@ class Jenga_Portal_CPT {
         <p>
             <label><strong><?php _e( 'Status:', 'jenga-portal' ); ?></strong><br>
             <select name="jenga_status" class="widefat">
-                <option value="Not Started" <?php selected( $status, 'Not Started' ); ?>>Not Started</option>
-                <option value="In Progress" <?php selected( $status, 'In Progress' ); ?>>In Progress</option>
-                <option value="Under Review" <?php selected( $status, 'Under Review' ); ?>>Under Review</option>
-                <option value="Completed" <?php selected( $status, 'Completed' ); ?>>Completed</option>
+                <?php foreach ( $statuses as $val => $label ) : ?>
+                    <option value="<?php echo esc_attr( $val ); ?>" <?php selected( $status, $val ); ?>><?php echo esc_html( $label ); ?></option>
+                <?php endforeach; ?>
             </select>
             </label>
         </p>
@@ -146,8 +223,14 @@ class Jenga_Portal_CPT {
         $priority   = get_post_meta( $post->ID, '_jenga_priority', true );
         $status     = get_post_meta( $post->ID, '_jenga_ticket_status', true );
 
-        $clients = get_users( array( 'role__in' => array( 'portal_client', 'administrator' ) ) );
-        $projects = get_posts( array( 'post_type' => 'jenga_project', 'numberposts' => -1 ) );
+        $clients    = get_users( array( 'role__in' => array( 'portal_client', 'administrator' ) ) );
+        $projects   = get_posts( array( 'post_type' => 'jenga_project', 'numberposts' => -1 ) );
+        $priorities = apply_filters( 'jenga_portal_ticket_priorities', array(
+            'Low'    => __( 'Low', 'jenga-portal' ),
+            'Medium' => __( 'Medium', 'jenga-portal' ),
+            'High'   => __( 'High', 'jenga-portal' ),
+            'Urgent' => __( 'Urgent', 'jenga-portal' ),
+        ) );
         ?>
         <p>
             <label><strong><?php _e( 'Client:', 'jenga-portal' ); ?></strong><br>
@@ -172,10 +255,9 @@ class Jenga_Portal_CPT {
         <p>
             <label><strong><?php _e( 'Priority:', 'jenga-portal' ); ?></strong><br>
             <select name="jenga_priority" class="widefat">
-                <option value="Low" <?php selected( $priority, 'Low' ); ?>>Low</option>
-                <option value="Medium" <?php selected( $priority, 'Medium' ); ?>>Medium</option>
-                <option value="High" <?php selected( $priority, 'High' ); ?>>High</option>
-                <option value="Urgent" <?php selected( $priority, 'Urgent' ); ?>>Urgent</option>
+                <?php foreach ( $priorities as $val => $label ) : ?>
+                    <option value="<?php echo esc_attr( $val ); ?>" <?php selected( $priority, $val ); ?>><?php echo esc_html( $label ); ?></option>
+                <?php endforeach; ?>
             </select>
             </label>
         </p>
@@ -236,8 +318,8 @@ class Jenga_Portal_CPT {
         </p>
         <p>
             <label><strong><?php _e( 'File URL:', 'jenga-portal' ); ?></strong><br>
-            <input type="text" name="jenga_file_url" value="<?php echo esc_attr( $file_url ); ?>" class="widefat">
-            <em>(Upload media via Add Media button and paste URL here, or use portal upload)</em>
+            <input type="text" id="jenga_file_url" name="jenga_file_url" value="<?php echo esc_attr( $file_url ); ?>" class="widefat" style="margin-bottom:6px;">
+            <button type="button" id="jenga-media-upload-btn" class="button button-secondary"><?php _e( 'Choose File', 'jenga-portal' ); ?></button>
             </label>
         </p>
         <?php

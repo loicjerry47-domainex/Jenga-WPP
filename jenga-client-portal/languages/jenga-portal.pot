@@ -1,0 +1,663 @@
+# Copyright (C) 2024 Loic Hazoume
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Jenga Client Portal 1.0.0\n"
+"Report-Msgid-Bugs-To: jerryhazoume@gmail.com\n"
+"POT-Creation-Date: 2024-01-01 00:00:00+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2024-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Generator: Jenga Client Portal\n"
+"X-Domain: jenga-portal\n"
+
+#: jenga-client-portal.php
+msgid "Portal Client"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Client Portal"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Overview"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Clients"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Settings"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Client Portal Overview"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Portal Clients"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Open Tickets"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Active Projects"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Documents"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "View all &rarr;"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Ticket"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Client"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Priority"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Status"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Submitted"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Edit"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "No open tickets. All clear!"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Add New User"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Name"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Email"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Projects"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "No portal clients found. Create a WordPress user and assign the \"Portal Client\" role."
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Portal Settings"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Branding"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Brand Name"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Appears in email notifications. Defaults to site name if empty."
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Portal Pages"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Select the WordPress pages where each portal shortcode has been placed."
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Login Page"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Dashboard Page"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Projects Page"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Tickets Page"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Documents Page"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "— Select a page —"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Shortcode: %s"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Email Notifications"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Admin: New ticket submitted"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Admin: Client replied to ticket"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Client: Ticket status changed"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Client: Admin replied to ticket"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Client: New document uploaded"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Client: Project status changed"
+msgstr ""
+
+#: includes/class-portal-admin.php
+msgid "Enabled"
+msgstr ""
+
+#: includes/class-portal-ajax.php
+msgid "Permission denied."
+msgstr ""
+
+#: includes/class-portal-ajax.php
+msgid "Title and description are required."
+msgstr ""
+
+#: includes/class-portal-ajax.php
+msgid "Error creating ticket."
+msgstr ""
+
+#: includes/class-portal-ajax.php
+msgid "Ticket submitted successfully!"
+msgstr ""
+
+#: includes/class-portal-ajax.php
+msgid "Please log in."
+msgstr ""
+
+#: includes/class-portal-ajax.php
+msgid "Invalid document."
+msgstr ""
+
+#: includes/class-portal-ajax.php
+msgid "Document not found."
+msgstr ""
+
+#: includes/class-portal-ajax.php
+msgid "Access denied."
+msgstr ""
+
+#: includes/class-portal-ajax.php
+msgid "File not available."
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "Projects"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "Project"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "Tickets"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "Ticket"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "Documents"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "Document"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "Project Types"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "Ticket Categories"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "Project Details"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "Ticket Details"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "Document Details"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "Select Client"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "Client:"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "Status:"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "Not Started"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "In Progress"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "Under Review"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "Completed"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "Start Date:"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "Due Date:"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "Progress (%):"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "Budget:"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "Project URL:"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "None"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "Related Project:"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "Low"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "Medium"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "High"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "Urgent"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "Open"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "Awaiting Reply"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "Resolved"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "Closed"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "Type:"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "Invoice"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "Contract"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "Deliverable"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "Report"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "Other"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "File URL:"
+msgstr ""
+
+#: includes/class-portal-cpt.php
+msgid "Choose File"
+msgstr ""
+
+#: includes/class-portal-shortcodes.php
+msgid "You do not have permission to view this page."
+msgstr ""
+
+#: includes/class-portal-shortcodes.php
+msgid "Access denied."
+msgstr ""
+
+#: includes/class-portal-shortcodes.php
+msgid "You are already logged in."
+msgstr ""
+
+#: templates/portal-login.php
+msgid "Client Portal Login"
+msgstr ""
+
+#: templates/portal-login.php
+msgid "Email Address or Username"
+msgstr ""
+
+#: templates/portal-login.php
+msgid "Password"
+msgstr ""
+
+#: templates/portal-login.php
+msgid "Remember Me"
+msgstr ""
+
+#: templates/portal-login.php
+msgid "Log In"
+msgstr ""
+
+#: templates/portal-login.php
+msgid "Lost your password?"
+msgstr ""
+
+#: templates/portal-dashboard.php
+msgid "Welcome back, %s"
+msgstr ""
+
+#: templates/portal-dashboard.php
+msgid "Log Out"
+msgstr ""
+
+#: templates/portal-dashboard.php
+msgid "Active Projects"
+msgstr ""
+
+#: templates/portal-dashboard.php
+msgid "Open Tickets"
+msgstr ""
+
+#: templates/portal-dashboard.php
+msgid "Documents"
+msgstr ""
+
+#: templates/portal-dashboard.php
+msgid "Next Deadline"
+msgstr ""
+
+#: templates/portal-dashboard.php
+msgid "Recent Projects"
+msgstr ""
+
+#: templates/portal-dashboard.php
+msgid "Complete"
+msgstr ""
+
+#: templates/portal-dashboard.php
+msgid "Due:"
+msgstr ""
+
+#: templates/portal-dashboard.php
+msgid "No active projects at the moment."
+msgstr ""
+
+#: templates/portal-dashboard.php
+msgid "View All Projects &rarr;"
+msgstr ""
+
+#: templates/portal-dashboard.php
+msgid "Quick Actions"
+msgstr ""
+
+#: templates/portal-dashboard.php
+msgid "Submit New Ticket"
+msgstr ""
+
+#: templates/portal-dashboard.php
+msgid "Contact Support"
+msgstr ""
+
+#: templates/portal-dashboard.php
+msgid "My Projects"
+msgstr ""
+
+#: templates/portal-dashboard.php
+msgid "My Documents"
+msgstr ""
+
+#: templates/portal-dashboard.php
+msgid "Recent Documents"
+msgstr ""
+
+#: templates/portal-dashboard.php
+msgid "View"
+msgstr ""
+
+#: templates/portal-dashboard.php
+msgid "No documents available."
+msgstr ""
+
+#: templates/portal-projects.php
+msgid "My Projects"
+msgstr ""
+
+#: templates/portal-projects.php
+msgid "&larr; Back to Dashboard"
+msgstr ""
+
+#: templates/portal-projects.php
+msgid "Started:"
+msgstr ""
+
+#: templates/portal-projects.php
+msgid "View Details"
+msgstr ""
+
+#: templates/portal-projects.php
+msgid "You have no projects assigned."
+msgstr ""
+
+#: templates/portal-single-project.php
+msgid "Project Status"
+msgstr ""
+
+#: templates/portal-single-project.php
+msgid "Project Details"
+msgstr ""
+
+#: templates/portal-single-project.php
+msgid "Start Date:"
+msgstr ""
+
+#: templates/portal-single-project.php
+msgid "Due Date:"
+msgstr ""
+
+#: templates/portal-single-project.php
+msgid "Budget:"
+msgstr ""
+
+#: templates/portal-single-project.php
+msgid "View Project Live"
+msgstr ""
+
+#: templates/portal-single-project.php
+msgid "Description & Scope"
+msgstr ""
+
+#: templates/portal-single-project.php
+msgid "Project not found or access denied."
+msgstr ""
+
+#: templates/portal-tickets.php
+msgid "Support Tickets"
+msgstr ""
+
+#: templates/portal-tickets.php
+msgid "Your Tickets"
+msgstr ""
+
+#: templates/portal-tickets.php
+msgid "You have no support tickets."
+msgstr ""
+
+#: templates/portal-tickets.php
+msgid "Submit a New Ticket"
+msgstr ""
+
+#: templates/portal-tickets.php
+msgid "Ticket Subject *"
+msgstr ""
+
+#: templates/portal-tickets.php
+msgid "Category"
+msgstr ""
+
+#: templates/portal-tickets.php
+msgid "Select a Category"
+msgstr ""
+
+#: templates/portal-tickets.php
+msgid "Related Project"
+msgstr ""
+
+#: templates/portal-tickets.php
+msgid "General / None"
+msgstr ""
+
+#: templates/portal-tickets.php
+msgid "Description *"
+msgstr ""
+
+#: templates/portal-tickets.php
+msgid "Submit Ticket"
+msgstr ""
+
+#: templates/portal-single-ticket.php
+msgid "Discussion"
+msgstr ""
+
+#: templates/portal-single-ticket.php
+msgid "Support Agent"
+msgstr ""
+
+#: templates/portal-single-ticket.php
+msgid "Project:"
+msgstr ""
+
+#: templates/portal-single-ticket.php
+msgid "Write a Reply"
+msgstr ""
+
+#: templates/portal-single-ticket.php
+msgid "Send Reply"
+msgstr ""
+
+#: templates/portal-single-ticket.php
+msgid "This ticket is closed. If you need further assistance, please open a new ticket."
+msgstr ""
+
+#: templates/portal-single-ticket.php
+msgid "Ticket not found or access denied."
+msgstr ""
+
+#: templates/portal-documents.php
+msgid "My Documents"
+msgstr ""
+
+#: templates/portal-documents.php
+msgid "Document Name"
+msgstr ""
+
+#: templates/portal-documents.php
+msgid "Type"
+msgstr ""
+
+#: templates/portal-documents.php
+msgid "Project"
+msgstr ""
+
+#: templates/portal-documents.php
+msgid "Date"
+msgstr ""
+
+#: templates/portal-documents.php
+msgid "Action"
+msgstr ""
+
+#: templates/portal-documents.php
+msgid "Download"
+msgstr ""
+
+#: templates/portal-documents.php
+msgid "Not available"
+msgstr ""
+
+#: templates/portal-documents.php
+msgid "No documents available."
+msgstr ""

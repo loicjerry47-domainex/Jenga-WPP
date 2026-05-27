@@ -46,8 +46,14 @@ $documents = get_posts( array(
                             <td><?php echo esc_html( $project_title ); ?></td>
                             <td><?php echo get_the_date( '', $doc->ID ); ?></td>
                             <td style="text-align:right;">
-                                <?php if ( $url ) : ?>
-                                    <a href="<?php echo esc_url( $url ); ?>" target="_blank" class="jp-btn" style="padding: 0.25rem 0.75rem; font-size: 0.875rem;"><?php _e( 'Download', 'jenga-portal' ); ?></a>
+                                <?php if ( $url ) :
+                                    $dl_url = add_query_arg( array(
+                                        'action'  => 'jenga_download_document',
+                                        'doc_id'  => $doc->ID,
+                                        'nonce'   => wp_create_nonce( 'jenga_portal_nonce' ),
+                                    ), admin_url( 'admin-ajax.php' ) );
+                                ?>
+                                    <a href="<?php echo esc_url( $dl_url ); ?>" class="jp-btn" style="padding: 0.25rem 0.75rem; font-size: 0.875rem;"><?php _e( 'Download', 'jenga-portal' ); ?></a>
                                 <?php else : ?>
                                     <span style="color:var(--jp-text-muted); font-size:0.875rem;"><?php _e( 'Not available', 'jenga-portal' ); ?></span>
                                 <?php endif; ?>

@@ -28,16 +28,7 @@ if ( isset( $_POST['submit_reply'] ) && isset( $_POST['ticket_reply_nonce'] ) &&
         );
         wp_insert_comment( $commentdata );
         
-        // Notify admin about this comment by client
-        $settings = get_option( 'jenga_portal_settings' );
-        if ( empty( $settings['notify_admin_ticket'] ) || $settings['notify_admin_ticket'] ) {
-            $to = get_option( 'admin_email' );
-            $subject = sprintf( __( '[%s] New Reply: %s', 'jenga-portal' ), get_bloginfo( 'name' ), $ticket->post_title );
-            $message = sprintf( __( '%s has replied to the ticket.', 'jenga-portal' ), $current_user->display_name ) . "\n\n";
-            $message .= $reply_content . "\n\n";
-            $message .= __( 'View Ticket:', 'jenga-portal' ) . ' ' . admin_url( 'post.php?post=' . $ticket_id . '&action=edit' );
-            wp_mail( $to, $subject, $message );
-        }
+        Jenga_Portal_Notifications::notify_admin_ticket_reply( $ticket_id, $reply_content, $current_user->ID );
         
         // Refresh page to show comment without resubmission
         echo '<script>window.location.href="' . esc_url( add_query_arg( 'ticket_id', $ticket_id ) ) . '";</script>';

@@ -36,6 +36,7 @@ register_deactivation_hook( __FILE__, array( 'Jenga_Portal_Setup', 'deactivate' 
 // Initialize
 add_action( 'plugins_loaded', 'jenga_portal_init' );
 function jenga_portal_init() {
+    load_plugin_textdomain( 'jenga-portal', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
     Jenga_Portal_CPT::init();
     Jenga_Portal_Shortcodes::init();
     Jenga_Portal_Ajax::init();
@@ -52,12 +53,18 @@ function jenga_portal_enqueue_scripts() {
     
     wp_localize_script( 'jenga-portal-tickets', 'jenga_portal_ajax', array(
         'ajax_url' => admin_url( 'admin-ajax.php' ),
-        'nonce'    => wp_create_nonce( 'jenga_portal_nonce' )
+        'nonce'    => wp_create_nonce( 'jenga_portal_nonce' ),
     ) );
 }
 
 add_action( 'admin_enqueue_scripts', 'jenga_portal_admin_scripts' );
-function jenga_portal_admin_scripts() {
+function jenga_portal_admin_scripts( $hook ) {
     wp_enqueue_style( 'jenga-portal-admin', JENGA_PORTAL_URL . 'assets/css/portal-admin.css', array(), JENGA_PORTAL_VERSION );
     wp_enqueue_script( 'jenga-portal-admin', JENGA_PORTAL_URL . 'assets/js/portal-admin.js', array( 'jquery' ), JENGA_PORTAL_VERSION, true );
+
+    // Enqueue WP media uploader only on document edit screens
+    global $post;
+    if ( ( $hook === 'post.php' || $hook === 'post-new.php' ) && isset( $post ) && $post->post_type === 'jenga_document' ) {
+        wp_enqueue_media();
+    }
 }

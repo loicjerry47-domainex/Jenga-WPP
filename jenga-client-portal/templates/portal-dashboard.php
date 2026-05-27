@@ -4,7 +4,12 @@
  */
 
 $current_user = wp_get_current_user();
-$first_name = $current_user->user_firstname ? $current_user->user_firstname : $current_user->display_name;
+$first_name   = $current_user->user_firstname ? $current_user->user_firstname : $current_user->display_name;
+
+$_jp_settings       = get_option( 'jenga_portal_settings', array() );
+$_jp_projects_url   = ! empty( $_jp_settings['projects_page'] )  ? get_permalink( $_jp_settings['projects_page'] )  : '';
+$_jp_tickets_url    = ! empty( $_jp_settings['tickets_page'] )   ? get_permalink( $_jp_settings['tickets_page'] )   : '';
+$_jp_documents_url  = ! empty( $_jp_settings['documents_page'] ) ? get_permalink( $_jp_settings['documents_page'] ) : '';
 
 // Get Active Projects
 $projects = get_posts( array(
@@ -131,16 +136,25 @@ foreach ( $projects as $proj ) {
             <?php else : ?>
                 <div class="jp-card"><p><?php _e( 'No active projects at the moment.', 'jenga-portal' ); ?></p></div>
             <?php endif; ?>
+            <?php if ( $_jp_projects_url ) : ?>
             <div style="margin-top:1rem;">
-                <a href="<?php echo add_query_arg( 'view', 'projects' ); ?>" style="color:var(--jp-accent);"><?php _e( 'View All Projects &rarr;', 'jenga-portal' ); ?></a>
+                <a href="<?php echo esc_url( $_jp_projects_url ); ?>" style="color:var(--jp-accent);"><?php _e( 'View All Projects &rarr;', 'jenga-portal' ); ?></a>
             </div>
+            <?php endif; ?>
         </div>
 
         <div>
             <h3><?php _e( 'Quick Actions', 'jenga-portal' ); ?></h3>
             <div class="jp-card" style="display:flex; flex-direction:column; gap:1rem;">
-                <a href="?view=tickets#new" class="jp-btn" style="text-align:center;"><?php _e( 'Submit New Ticket', 'jenga-portal' ); ?></a>
-                <a href="mailto:<?php echo get_option('admin_email'); ?>" class="jp-btn" style="text-align:center; background:var(--jp-border); color:var(--jp-text);"><?php _e( 'Contact Support', 'jenga-portal' ); ?></a>
+                <?php $ticket_new_url = $_jp_tickets_url ? add_query_arg( 'new', '1', $_jp_tickets_url ) . '#new' : '#new'; ?>
+                <a href="<?php echo esc_url( $ticket_new_url ); ?>" class="jp-btn" style="text-align:center;"><?php _e( 'Submit New Ticket', 'jenga-portal' ); ?></a>
+                <a href="mailto:<?php echo esc_attr( get_option( 'admin_email' ) ); ?>" class="jp-btn" style="text-align:center; background:var(--jp-border); color:var(--jp-text);"><?php _e( 'Contact Support', 'jenga-portal' ); ?></a>
+                <?php if ( $_jp_projects_url ) : ?>
+                <a href="<?php echo esc_url( $_jp_projects_url ); ?>" class="jp-btn" style="text-align:center; background:var(--jp-border); color:var(--jp-text);"><?php _e( 'My Projects', 'jenga-portal' ); ?></a>
+                <?php endif; ?>
+                <?php if ( $_jp_documents_url ) : ?>
+                <a href="<?php echo esc_url( $_jp_documents_url ); ?>" class="jp-btn" style="text-align:center; background:var(--jp-border); color:var(--jp-text);"><?php _e( 'My Documents', 'jenga-portal' ); ?></a>
+                <?php endif; ?>
             </div>
 
             <h3 style="margin-top:2rem;"><?php _e( 'Recent Documents', 'jenga-portal' ); ?></h3>
@@ -157,8 +171,14 @@ foreach ( $projects as $proj ) {
                                 <div style="font-weight:600;"><?php echo esc_html( $doc->post_title ); ?></div>
                                 <div style="font-size:0.75rem; color:var(--jp-text-muted);"><?php echo esc_html( $type ); ?></div>
                             </div>
-                            <?php if ( $url ) : ?>
-                                <a href="<?php echo esc_url( $url ); ?>" target="_blank" class="jp-btn" style="padding:0.25rem 0.5rem; font-size:0.75rem;"><?php _e( 'View', 'jenga-portal' ); ?></a>
+                            <?php if ( $url ) :
+                                $dl_url = add_query_arg( array(
+                                    'action' => 'jenga_download_document',
+                                    'doc_id' => $doc->ID,
+                                    'nonce'  => wp_create_nonce( 'jenga_portal_nonce' ),
+                                ), admin_url( 'admin-ajax.php' ) );
+                            ?>
+                                <a href="<?php echo esc_url( $dl_url ); ?>" class="jp-btn" style="padding:0.25rem 0.5rem; font-size:0.75rem;"><?php _e( 'View', 'jenga-portal' ); ?></a>
                             <?php endif; ?>
                         </div>
                     <?php endforeach; ?>

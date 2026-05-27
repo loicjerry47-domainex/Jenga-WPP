@@ -1,15 +1,87 @@
-/* Admin Styles for Jenga Client Portal */
+/* Jenga Client Portal — Admin Styles */
 
 .jenga-admin-wrap {
     max-width: 1200px;
 }
 
 .jenga-admin-wrap h1 {
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
+    border-bottom: 1px solid #dcdcde;
+    padding-bottom: 12px;
+    margin-bottom: 24px;
 }
 
 .jenga-admin-wrap .form-table th {
     width: 250px;
 }
+
+/* ── Stat Cards ─────────────────────────────────────────────────────────── */
+
+.jenga-stats-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+}
+
+.jenga-stat-card {
+    background: #fff;
+    border: 1px solid #dcdcde;
+    border-radius: 6px;
+    padding: 20px 24px;
+    flex: 1;
+    min-width: 160px;
+    position: relative;
+}
+
+.jenga-stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #c9a44a;
+    border-radius: 6px 6px 0 0;
+}
+
+.jenga-stat-number {
+    font-size: 36px;
+    font-weight: 700;
+    color: #1d2327;
+    line-height: 1;
+    margin-bottom: 6px;
+}
+
+.jenga-stat-label {
+    font-size: 13px;
+    color: #646970;
+    margin-bottom: 12px;
+}
+
+.jenga-stat-link {
+    font-size: 12px;
+    color: #c9a44a;
+    text-decoration: none;
+}
+
+.jenga-stat-link:hover {
+    color: #a07e2e;
+    text-decoration: underline;
+}
+
+/* ── Overview Table ─────────────────────────────────────────────────────── */
+
+.jenga-overview-table .jenga-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.jenga-badge-low     { background: #f0f6fc; color: #0969da; }
+.jenga-badge-medium  { background: #fff8c5; color: #9a6700; }
+.jenga-badge-high    { background: #fff1e5; color: #bc4c00; }
+.jenga-badge-urgent  { background: #ffebe9; color: #cf222e; }
